@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:picsgoo/component/views/feeback/feeback_form.dart';
 import 'package:picsgoo/component/views/select_wallpaper/select_wallpaper_view.dart';
 import 'package:picsgoo/component/widgets/wallpaper_background.dart';
 
@@ -62,10 +63,10 @@ class _SettingViewState extends State<SettingView> {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.info, color: Colors.white),
-          title: Text('About', style: TextStyle(color: Colors.white)),
+          leading: Icon(Icons.feedback_outlined, color: Colors.white),
+          title: Text('Send Feedback', style: TextStyle(color: Colors.white)),
           onTap: () {
-            // Show about dialog
+            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackScreen()));
           },
         ),
       ],
