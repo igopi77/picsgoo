@@ -1,4 +1,4 @@
-# Launcher App - User Guide
+![Screenshot_2025-08-24-16-24-32-853_com picsgoo picsgoo](https://github.com/user-attachments/assets/d07c41c8-cd26-4e2d-b0b7-c4ef3c366933)# Launcher App - User Guide
 
 ## Overview
 This is a productivity-focused launcher app designed to help users prioritize essential applications and reduce time spent on unnecessary apps.
@@ -50,3 +50,14 @@ If you encounter any issues or have suggestions, use the **Send Feedback** optio
 ---
 
 *This launcher app is designed to enhance your mobile productivity by keeping essential apps easily accessible while minimizing distractions from unnecessary applications.*
+
+## Screenshot
+![Screenshot_2025-08-24-19-16-30-553_com picsgoo picsgoo](https://github.com/user-attachments/assets/d3537b29-af91-40eb-b4f1-548d4c3aadfc)
+![Screenshot_2025-08-24-19-16-47-739_com picsgoo picsgoo](https://github.com/user-attachments/assets/456afbe3-add7-42b0-b800-a62416e2d896)
+![Screenshot_2025-08-24-16-24-32-853_com picsgoo picsgoo](https://github.com/user-attachments/assets/b8b95fa4-f6a6-4b2c-b0cb-6f5d4be35bcf)
+![Screenshot_2025-08-24-16-24-38-199_com picsgoo picsgoo](https://github.com/user-attachments/assets/0b5ff57a-e920-4c5c-9f24-4c37576d8ed4)
+![Screenshot_2025-08-24-16-24-43-111_com picsgoo picsgoo](https://github.com/user-attachments/assets/ae2cd04f-6ed4-486d-818a-b48efa7931ee)
+![Screenshot_2025-08-24-16-24-58-762_com picsgoo picsgoo](https://github.com/user-attachments/assets/d6fef28d-6307-4008-a16a-5a017e6652c5)
+![Screenshot_2025-08-24-16-25-04-463_com picsgoo picsgoo](https://github.com/user-attachments/assets/b117f7ce-98a2-422b-bed1-4b083bc195f3)
+![Screenshot_2025-08-24-16-25-10-229_com picsgoo picsgoo](https://github.com/user-attachments/assets/ecb8cae3-2318-4ce1-8d53-d9adadd1f337)
+
