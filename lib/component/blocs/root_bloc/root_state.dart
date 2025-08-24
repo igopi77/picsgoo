@@ -10,6 +10,39 @@ abstract class RootShowPrioritizedBuildActionState extends RootShowPrioritizedBu
 
 abstract class RootScreeBuildState extends RootState {}
 
+abstract class WallpaperState extends RootState {}
+
+class WallpaperLoadedState extends WallpaperState {
+  final String currentWallpaper;
+  WallpaperLoadedState({required this.currentWallpaper});
+}
+
+class WallpaperLoadingState extends WallpaperState {}
+
+class SelectWallpaperScreenState extends WallpaperState {
+  final List<String> availableWallpapers;
+  final String selectedWallpaper;
+  final String currentWallpaper;
+
+  SelectWallpaperScreenState({
+    required this.availableWallpapers,
+    required this.selectedWallpaper,
+    required this.currentWallpaper,
+  });
+
+  SelectWallpaperScreenState copyWith({
+    List<String>? availableWallpapers,
+    String? selectedWallpaper,
+    String? currentWallpaper,
+  }) {
+    return SelectWallpaperScreenState(
+      availableWallpapers: availableWallpapers ?? this.availableWallpapers,
+      selectedWallpaper: selectedWallpaper ?? this.selectedWallpaper,
+      currentWallpaper: currentWallpaper ?? this.currentWallpaper,
+    );
+  }
+}
+
 final class RootInitial extends RootState {}
 
 class InitialAllAppsLoadedState extends RootShowPrioritizedBuildActionState {

@@ -2,6 +2,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:picsgoo/component/blocs/root_bloc/root_bloc.dart';
+import 'package:picsgoo/component/widgets/wallpaper_background.dart';
 
 import 'all_apps/show_all_apps.dart';
 import 'all_apps/show_prioritized_apps.dart';
@@ -13,13 +14,7 @@ class RootScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage('https://tse3.mm.bing.net/th/id/OIP.xZu0g3ICU15XJh9cR6l2EgAAAA?r=0&cb=thfc1&rs=1&pid=ImgDetMain&o=7&rm=3'),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: WallpaperBackground(
         child: bodyPartOfRootScreen(context),
       ),
     );

@@ -6,10 +6,13 @@ import 'package:device_apps/device_apps.dart';
 import 'package:picsgoo/component/models/apps_model.dart';
 import 'package:picsgoo/component/utils/preferences/app_preferences/priority_apps_prefs.dart';
 
+import '../../utils/preferences/app_preferences/wallpaper_prefs.dart';
+
 part 'root_event.dart';
 part 'root_state.dart';
 
 class RootBloc extends Bloc<RootEvent, RootState> {
+  String _currentWallpaper = 'assets/wallpapers/0.jpg';
   RootBloc() : super(RootInitial()) {
     on<LoadAppsEvent> (loadAppsEvent);
     on<LaunchAppEvent> (launchAppEvent);
@@ -18,7 +21,45 @@ class RootBloc extends Bloc<RootEvent, RootState> {
     on<SavePriorityAppsEvent> (savePriorityAppsEvent);
     on<TogglePriorityAppEvent> (togglePriorityAppEvent);
     on<ResetToShowPrioritizedEvent> ((event, emit) => emit(ShowPrioritizedAllAppsLoadedResetState()));
+    on<LoadWallpaperEvent>(_loadWallpaperEvent);
+    on<SetWallpaperEvent>(_setWallpaperEvent);
+    on<SelectWallpaperEvent>(_selectWallpaperEvent);
+    on<EditPriorityAppsEvent> (editPriorityAppsEvent);
+
+    // Load wallpaper on initialization
+    add(LoadWallpaperEvent());
   }
+
+  String get currentWallpaper => _currentWallpaper;
+
+  Future<void> _loadWallpaperEvent(LoadWallpaperEvent event, Emitter<RootState> emit) async {
+    _currentWallpaper = await WallpaperPrefs().getWallpaper();
+    emit(WallpaperLoadedState(currentWallpaper: _currentWallpaper));
+  }
+
+  Future<void> _setWallpaperEvent(SetWallpaperEvent event, Emitter<RootState> emit) async {
+    emit(WallpaperLoadingState());
+    _currentWallpaper = event.wallpaperPath;
+    await WallpaperPrefs().setWallpaper(event.wallpaperPath);
+    emit(WallpaperLoadedState(currentWallpaper: _currentWallpaper));
+  }
+
+  Future<void> _selectWallpaperEvent(SelectWallpaperEvent event, Emitter<RootState> emit) async {
+    // Generate list of available wallpapers (assuming 12 wallpapers)
+    List<String> availableWallpapers = List.generate(
+        12,
+            (index) => 'assets/wallpapers/$index.jpg'
+    );
+
+    final currentWallpaper = await WallpaperPrefs().getWallpaper();
+
+    emit(SelectWallpaperScreenState(
+      availableWallpapers: availableWallpapers,
+      selectedWallpaper: event.wallpaperPath,
+      currentWallpaper: currentWallpaper,
+    ));
+  }
+
 
   Future<void> loadAppsEvent(LoadAppsEvent event, Emitter<RootState> emit) async {
     emit(PreparingAllAppsLoadingState());
@@ -71,5 +112,12 @@ class RootBloc extends Bloc<RootEvent, RootState> {
       }
       emit(currentState.copyWith(selectedPackages: selectedPackages));
     }
+  }
+
+  Future<void> editPriorityAppsEvent(EditPriorityAppsEvent event, Emitter<RootState> emit) async {
+    List<String> prioritizedPackageNames = await PriorityAppsPrefs().getPriorityApps();
+    List<Application> allApps = await DeviceApps.getInstalledApplications(includeSystemApps:true, onlyAppsWithLaunchIntent: true, includeAppIcons: true);
+    List<AppsModel> allAppsModels = allApps.map((app) => AppsModel(app: app)).toList();
+    emit(SelectPriorityAppState(allApps: allAppsModels, selectedPackages: prioritizedPackageNames.toSet()));
   }
 }
