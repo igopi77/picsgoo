@@ -325,6 +325,13 @@ class _AllAppsViewState extends State<AllAppsView> {
   }
 
   Widget _buildAlphabetIndex() {
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final isKeyboardVisible = keyboardHeight > 0;
+
+    // Hide alphabet index when keyboard is visible (cleanest solution)
+    if (isKeyboardVisible) {
+      return const SizedBox.shrink();
+    }
     return Positioned(
       right: 4,
       top: MediaQuery.of(context).size.height * 0.25,
