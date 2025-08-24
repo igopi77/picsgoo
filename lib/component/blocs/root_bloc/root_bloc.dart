@@ -6,6 +6,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:picsgoo/component/models/apps_model.dart';
 import 'package:picsgoo/component/utils/preferences/app_preferences/priority_apps_prefs.dart';
 import 'package:picsgoo/data/appvalues/constants.dart';
+import 'package:picsgoo/service/launch_service/launc_service.dart';
 
 import '../../utils/preferences/app_preferences/wallpaper_prefs.dart';
 
@@ -13,7 +14,7 @@ part 'root_event.dart';
 part 'root_state.dart';
 
 class RootBloc extends Bloc<RootEvent, RootState> {
-  String _currentWallpaper = 'assets/wallpapers/0.jpg';
+  String _currentWallpaper = 'assets/wallpapers/10.jpg';
   RootBloc() : super(RootInitial()) {
     on<LoadAppsEvent> (loadAppsEvent);
     on<LaunchAppEvent> (launchAppEvent);
@@ -36,6 +37,7 @@ class RootBloc extends Bloc<RootEvent, RootState> {
   Future<void> _loadWallpaperEvent(LoadWallpaperEvent event, Emitter<RootState> emit) async {
     _currentWallpaper = await WallpaperPrefs().getWallpaper();
     emit(WallpaperLoadedState(currentWallpaper: _currentWallpaper));
+    AppValues.isAppDefault = await LauncherService.isDefaultLauncher();
   }
 
   Future<void> _setWallpaperEvent(SetWallpaperEvent event, Emitter<RootState> emit) async {

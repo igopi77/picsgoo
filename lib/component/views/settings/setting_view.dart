@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:picsgoo/component/views/feeback/feeback_form.dart';
 import 'package:picsgoo/component/views/select_wallpaper/select_wallpaper_view.dart';
 import 'package:picsgoo/component/widgets/wallpaper_background.dart';
+import 'package:picsgoo/data/appvalues/constants.dart';
 
 import '../../../service/launch_service/launc_service.dart';
 import '../../blocs/root_bloc/root_bloc.dart';
@@ -72,7 +73,7 @@ class _SettingViewState extends State<SettingView> {
         ),
         ListTile(
           leading: Icon(Icons.settings_accessibility, color: Colors.white),
-          title: Text('Set as default app', style: TextStyle(color: Colors.white)),
+          title: Text(AppValues.isAppDefault ? 'Change default app' : 'Set as default app', style: TextStyle(color: Colors.white)),
           onTap: () async {
             await LauncherService.setAsDefaultLauncher();
           },

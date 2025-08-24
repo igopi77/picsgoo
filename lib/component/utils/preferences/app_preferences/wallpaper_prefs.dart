@@ -8,7 +8,7 @@ class WallpaperPrefs {
     return instance;
   }
   static const String _wallpaperKey = 'selected_wallpaper';
-  static const String _defaultWallpaper = 'assets/wallpapers/1.jpg';
+  static const String _defaultWallpaper = 'assets/wallpapers/10.jpg';
 
   Future<void> setWallpaper(String wallpaperPath) async {
     final prefs = await SharedPreferences.getInstance();

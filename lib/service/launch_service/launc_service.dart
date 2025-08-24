@@ -10,4 +10,13 @@ class LauncherService {
       print("Failed to set as default launcher: '${e.message}'.");
     }
   }
+
+  static Future<bool> isDefaultLauncher() async {
+    try {
+      return await _channel.invokeMethod('checkDefaultLauncher') ?? false;
+    } catch (e) {
+      print('Error checking default launcher: $e');
+      return false;
+    }
+  }
 }
