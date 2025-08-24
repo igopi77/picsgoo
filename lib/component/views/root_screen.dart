@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:picsgoo/component/blocs/root_bloc/root_bloc.dart';
 import 'package:picsgoo/component/widgets/wallpaper_background.dart';
 
+import '../models/apps_model.dart';
 import 'all_apps/show_all_apps.dart';
 import 'all_apps/show_prioritized_apps.dart';
 
@@ -12,10 +13,13 @@ class RootScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: WallpaperBackground(
-        child: bodyPartOfRootScreen(context),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: WallpaperBackground(
+          child: bodyPartOfRootScreen(context),
+        ),
       ),
     );
   }
@@ -70,8 +74,10 @@ class RootScreen extends StatelessWidget {
                         height: 40,
                       ),
                     const SizedBox(width: 20,),
-                    Text(state.allApps[index].app.appName,
-                      style: const TextStyle(color: Colors.white),),
+                    Flexible(
+                      child: Text(state.allApps[index].app.appName,
+                        style: const TextStyle(color: Colors.white),overflow: TextOverflow.clip,),
+                    ),
                   ],
                 ),
                 controlAffinity: ListTileControlAffinity.leading,
@@ -86,15 +92,16 @@ class RootScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: state.selectedPackages.isEmpty ? Colors.grey.withOpacity(0.5) : Colors.blue,
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
               minimumSize: Size(MediaQuery.of(context).size.width, 50)
             ),
-              onPressed: state.selectedPackages.isEmpty ? null : () {
+              onPressed: () {
                 // Save prioritized apps and load them
+                if (state.selectedPackages.isEmpty) return;
                 context.read<RootBloc>().add(
                   SavePriorityAppsEvent(
                     packageNames: state.selectedPackages.toList(),
@@ -102,7 +109,7 @@ class RootScreen extends StatelessWidget {
                 );
               },
               child: Text(
-                'Save',
+                state.selectedPackages.isEmpty ? 'Select Atleast one' : 'Save',
                 style: TextStyle(
                   color: Colors.white,
                 ),

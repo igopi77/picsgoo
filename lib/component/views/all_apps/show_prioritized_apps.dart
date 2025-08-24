@@ -166,7 +166,7 @@ class _ShowPrioritizedMainAppsState extends State<ShowPrioritizedMainApps> {
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
-              physics: const BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               itemCount: state.prioritizedApps.length + 1,
               itemBuilder: (context, index) {
                 // Show prioritized apps first
