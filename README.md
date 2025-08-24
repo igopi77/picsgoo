@@ -4,7 +4,7 @@
 This is a productivity-focused launcher app designed to help users prioritize essential applications and reduce time spent on unnecessary apps.
 
 ## Installation
-Download the APK file: `[Insert APK download link here]`
+**📱 Download APK:** [Click here](https://github.com/igopi77/picsgoo/releases/download/v1.0.0/app-release.apk)
 
 *Note: You'll need to enable "Unknown Sources" in your device settings to install APK files.*
 
