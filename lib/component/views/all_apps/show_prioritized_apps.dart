@@ -57,6 +57,43 @@ class _ShowPrioritizedMainAppsState extends State<ShowPrioritizedMainApps> {
     super.dispose();
   }
 
+  Widget _buildMinimalHint(String action, String result) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: action,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.w300,
+                letterSpacing: 1,
+              ),
+            ),
+            TextSpan(
+              text: ' → ',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 10,
+              ),
+            ),
+            TextSpan(
+              text: result,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.w200,
+                letterSpacing: 0.8,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = widget.state;
@@ -99,6 +136,23 @@ class _ShowPrioritizedMainAppsState extends State<ShowPrioritizedMainApps> {
                           fontSize: 25,
                           fontWeight: FontWeight.w300,
                         ),
+                      ),
+                      TweenAnimationBuilder<double>(
+                        tween: Tween<double>(begin: 0, end: 1),
+                        duration: const Duration(minutes: 15),
+                        builder: (context, value, child) {
+                          return AnimatedOpacity(
+                            opacity: value < 0.8 ? 0.4 : (1 - value) * 2,
+                            duration: const Duration(milliseconds: 300),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildMinimalHint('Hold Anywhere', 'Settings'),
+                                _buildMinimalHint('Scroll Down', 'All Apps'),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ],
                   );
